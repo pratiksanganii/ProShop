@@ -22,6 +22,7 @@ const CartScreen = () => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
+  const { userInfo } = useSelector((state) => state.userLogin);
   const { cartItems } = cart;
 
   useEffect(() => {
@@ -35,7 +36,11 @@ const CartScreen = () => {
   };
 
   const checkoutHandler = (id) => {
-    navigate("/login?redirect=shipping");
+    if (!userInfo) {
+      navigate("/login?redirect=shipping");
+    } else {
+      navigate("/shipping");
+    }
   };
 
   return (
