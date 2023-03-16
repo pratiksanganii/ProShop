@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getUserDetail, updateUserProfile } from "../actions/userActions";
+import { getMyOrders } from "../../../backend/controllers/orderController.js";
+import { getUserDetail, updateUserProfile } from "../actions/userActions.js";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
@@ -17,6 +18,7 @@ const ProfileScreen = () => {
   const dispatch = useDispatch();
 
   const { loading, user, error } = useSelector((state) => state.userDetails);
+  const { loading:loadingOrders, error:errorOrders,orders } = useSelector((state) => state.orderListMy);
   const { userInfo } = useSelector((state) => state.userLogin);
   const {success} = useSelector(state=>state.userUpdateProfile)
 
@@ -26,6 +28,7 @@ const ProfileScreen = () => {
     } else {
       if (!user?.name) {
         dispatch(getUserDetail("profile"));
+        dispatch(getMyOrders())
       } else {
         setName(user.name);
         setEmail(user.email);
