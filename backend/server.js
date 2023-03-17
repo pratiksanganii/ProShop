@@ -26,7 +26,7 @@ app.get("/api/config/paypal", (req, res) =>
 );
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-console.log(process.env.NODE_ENV)
+
 if (process.env.NODE_ENV == "production") {
   app.use(express.static(path.join(__dirname, "../frontend/build")));
   app.get("*", (req, res) => {

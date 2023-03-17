@@ -19,7 +19,7 @@ const ProductScreen = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const [qty, setQty] = useState(1);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const productDetails = useSelector((state) => state.productDetails);
   const { product, loading, error } = productDetails;
@@ -29,8 +29,8 @@ const ProductScreen = () => {
   }, [params, dispatch]);
 
   const addToCartHandler = () => {
-    navigate(`/cart/${params.id}?qty=${qty}`)
-  }
+    navigate(`/cart/${params.id}?qty=${qty}`);
+  };
 
   return (
     <>
